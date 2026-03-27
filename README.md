@@ -10,7 +10,9 @@
 
 ArcadiaVibe is a live portfolio project built on Azure, designed to demonstrate real-world cloud deployment, automation, and infrastructure skills while progressing toward the AZ-104 (Azure Administrator) certification.
 
-This project is not just a static site — it is an evolving cloud-based environment.
+## Purpose
+
+This project is part of a hands-on approach to mastering Azure administration by building, deploying, and iterating on real infrastructure instead of relying solely on theoretical study.
 
 ---
 
