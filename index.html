@@ -49,27 +49,28 @@
     </div>
   </header>
 
-  <section class="api-test">
+<section class="api-test">
   <div class="container">
-    <button class="btn btn-secondary" onclick="testApi()">Test API</button>
-    <p id="api-result" style="margin-top: 10px;"></p>
+    <h2 class="section-title">System Status</h2>
+    <p class="section-copy">
+      Live backend status, deployment environment, region, Application Insights state, and current check time.
+    </p>
+
+    <div class="status-box" id="status-box">
+      <div class="status-grid">
+        <p><strong>Status:</strong> <span id="status-text">Idle</span></p>
+        <p><strong>Environment:</strong> <span id="status-environment">—</span></p>
+        <p><strong>Region:</strong> <span id="status-region">—</span></p>
+        <p><strong>App Insights:</strong> <span id="status-ai">—</span></p>
+        <p><strong>Last Check:</strong> <span id="status-time">—</span></p>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <button class="btn btn-secondary" onclick="checkStatus()">Check Status</button>
+    </div>
   </div>
 </section>
-
-<script>
-  async function testApi() {
-    const result = document.getElementById("api-result");
-
-    try {
-      const response = await fetch("/api/hello");
-      const data = await response.json();
-      result.textContent = data.message + " - " + data.timestamp;
-    } catch (error) {
-      result.textContent = "API test failed.";
-      console.error(error);
-    }
-  }
-</script>
 
   <section id="about">
     <div class="container">
@@ -217,5 +218,58 @@
       ArcadiaVibe — deployed with Azure Static Web Apps and GitHub Actions.
     </div>
   </footer>
+  
+  <script>
+  function format12Hour(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    });
+  }
+
+  async function checkStatus() {
+    const box = document.getElementById("status-box");
+    const statusText = document.getElementById("status-text");
+    const environmentText = document.getElementById("status-environment");
+    const regionText = document.getElementById("status-region");
+    const aiText = document.getElementById("status-ai");
+    const timeText = document.getElementById("status-time");
+
+    statusText.textContent = "Checking...";
+    environmentText.textContent = "—";
+    regionText.textContent = "—";
+    aiText.textContent = "—";
+    timeText.textContent = "—";
+    box.style.borderColor = "#888";
+
+    try {
+      const response = await fetch("/api/hello");
+      const data = await response.json();
+
+      statusText.textContent = data.status || "Online";
+      environmentText.textContent = data.environment || "Unknown";
+      regionText.textContent = data.region || "Unknown";
+      aiText.textContent = data.appInsights || "Unknown";
+      timeText.textContent = format12Hour(data.timestamp);
+
+      box.style.borderColor = "#4ade80";
+    } catch (error) {
+      statusText.textContent = "Offline";
+      environmentText.textContent = "Error";
+      regionText.textContent = "Error";
+      aiText.textContent = "Error";
+      timeText.textContent = "Error";
+
+      box.style.borderColor = "#f87171";
+      console.error(error);
+    }
+  }
+</script>
 </body>
 </html>
