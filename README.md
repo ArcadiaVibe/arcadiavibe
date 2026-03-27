@@ -60,6 +60,5 @@ This project is not just a static site — it is an evolving cloud-based environ
 IT Analyst | Azure & Cloud Infrastructure  
 
 - GitHub: https://github.com/ArcadiaVibe  
-- LinkedIn: https://www.linkedin.com/in/YOUR-LINK  
-
+- LinkedIn: https://www.linkedin.com/in/amir-haynes
 ---
