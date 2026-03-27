@@ -49,6 +49,24 @@
     </div>
   </header>
 
+  <button class="btn btn-secondary" onclick="testApi()">Test API</button>
+<p id="api-result"></p>
+
+<script>
+  async function testApi() {
+    const result = document.getElementById("api-result");
+
+    try {
+      const response = await fetch("/api/hello");
+      const data = await response.json();
+      result.textContent = data.message + " - " + data.timestamp;
+    } catch (error) {
+      result.textContent = "API test failed.";
+      console.error(error);
+    }
+  }
+</script>
+
   <section id="about">
     <div class="container">
       <h2 class="section-title">About This Site</h2>
