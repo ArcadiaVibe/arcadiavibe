@@ -18,7 +18,7 @@ This project is part of a hands-on approach to mastering Azure administration by
 
 ## Live Site
 
-🔗 https://gentle-forest-01428ec0f.2.azurestaticapps.net
+🔗 https://ArcadiaVibe.com/
 
 ---
 
